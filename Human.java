@@ -72,6 +72,8 @@ public class Human
         _healthStatus = HealthStatus.HEALTY;
         _id = cnt;
 
+        // use random values!
+        _deseaseDuration = 6;
     }
 
     /**
@@ -93,6 +95,15 @@ public class Human
     }
 
     /**
+     * Returns the duration of the COVID-19 desease.
+     * @return the duration of the COVID-19 desease.
+     */
+    public int getDeseaseDuration()
+    {
+        return _deseaseDuration;
+    }
+
+    /**
      * Returns the health status of the person in regard to COVID-19.
      * @return the actual health status.
      */
@@ -100,6 +111,7 @@ public class Human
     {
         return _healthStatus;
     }
+
     /**
      * Returns the level of the symptoms of the person.
      * @return the level of the symptoms.
@@ -110,6 +122,15 @@ public class Human
     }
 
     /**
+     * Returns the home node of the person.
+     * @return the home node of the person.
+     */
+    public LowestNode getHomeNode()
+    {
+        return _homeNode;
+    }
+
+    /**
      * Changes the health status of the person.
      * @param newHealthStatus the new health status.
      */
@@ -117,6 +138,7 @@ public class Human
     {
         _healthStatus = newHealthStatus;
     }
+
     /**
      * Changes the level of symptoms.
      * @param newSymptomsLevel the new level of symptoms.
@@ -126,7 +148,19 @@ public class Human
         _symptomLevel = newSymptomsLevel;
     }
 
-
+    /**
+     * Increments the desease duration by a value between 0 and 22. 
+     * 2 ticks = 1 day
+     * The minimal duration is 3 days (6 ticks) which is a increment 
+     * of the default value of 0 ticks.
+     * The maximal duration value is 14 days (28 ticks) which is a 
+     * of the default value of increment of 22 ticks.
+     * @param duration the new desease duration.
+     */
+    public void incrementDeseaseDuration(int duration)
+    {
+        _deseaseDuration+= duration;
+    }
     @Override
     public int hashCode() {
         return (int) _id;
