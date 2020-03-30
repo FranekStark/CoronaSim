@@ -49,10 +49,22 @@ public class Hospital {
         return numberOfPatients <= place;
     }
 
-    public void treatSickHuman(){
-
+    /**
+     * Treats a sick human if there is enough place
+     * 
+     * @param sickHuman the human to treat
+     * @throws IllegalStateException if there is not enough place
+     */
+    public void treatSickHuman(Human sickHuman){
+        if(!hasEnoughPlace(1)){
+            throw new IllegalStateException("Not enough place in Hospital");
+        }
+        _treatments.add(new Treatment(sickHuman));
     }
 
+    /**
+     * Reetrieves all 
+     */
     public void retreiveHealedHuman(){
 
     }
