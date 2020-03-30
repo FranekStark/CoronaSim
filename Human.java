@@ -16,6 +16,12 @@ import java.util.*;
  */
 public class Human
 {
+
+    /**
+     * The Counter of all Persons to set the Identifier
+     */
+    private static long cnt = 0;
+
     /**
      * The identifier of the person
      */
@@ -43,23 +49,16 @@ public class Human
      */
     private LowestNode _homeNode;
 
+
     /**
      * Describes the health status of the person. 
-     * HEALTHY       - Not infected with COVID-19. No influence on initial movement.
-     * CONTAGIOUS    - Infected and contagious but no symptoms, hence no influence on initial movement.
-     * ILL           - Infected with symptoms (level given by _symptomsLevel). Initial movement is affected.
-     * RECOVERED     - Not infected and sick anymore. Can not be infected again.
-     * DEAD          - person will be deleted.
      */
-    public enum _healthStatus{HEALTY, CONTAGIOUS, ILL, RECOVERED, DEAD};
+    private HealthStatus _healthStatus;
 
     /**
      * Describes the level of the Symptoms from COVID-19.
-     * NO - No Symptoms, can be contragious or not, no affection of the movement.
-     * MILD - Mild Symptoms, person stays in home node as long as infected.
-     * HEAVY - Heavy Symptoms, person goes to a hospital and can die.
      */
-    public enum _symptomsLevel{NO, MILD, HEAVY};
+    private SymptomLevel _symptomLevel;
 
     /**
      * Constructor of healthy Human.
@@ -70,7 +69,8 @@ public class Human
     {
         _age = age;
         _isPreDeseased = isPreDeseased;
-        _healthStatus = HEALTHY;
+        _healthStatus = HealthStatus.HEALTY;
+        _id = cnt;
 
     }
 
@@ -96,7 +96,7 @@ public class Human
      * Returns the health status of the person in regard to COVID-19.
      * @return the actual health status.
      */
-    public _healthStatus getHealthStatus()
+    public HealthStatus getHealthStatus()
     {
         return _healthStatus;
     }
@@ -104,16 +104,16 @@ public class Human
      * Returns the level of the symptoms of the person.
      * @return the level of the symptoms.
      */
-    public _symptomsLevel getSymptomsLevel()
+    public SymptomLevel getSymptomsLevel()
     {
-        return _symptomsLevel;
+        return _symptomLevel;
     }
 
     /**
      * Changes the health status of the person.
      * @param newHealthStatus the new health status.
      */
-    public void setHealthStatus(_healthStaus newHealthStatus)
+    public void setHealthStatus(HealthStatus newHealthStatus)
     {
         _healthStatus = newHealthStatus;
     }
@@ -121,8 +121,23 @@ public class Human
      * Changes the level of symptoms.
      * @param newSymptomsLevel the new level of symptoms.
      */
-    public void setSymptomsLevel(_symptomsLevel newSymptomsLevel)
+    public void setSymptomsLevel(SymptomLevel newSymptomsLevel)
     {
-        _symptomsLevel = newSymptomsLevel;
+        _symptomLevel = newSymptomsLevel;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return (int) _id;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Human){
+            Human that = (Human) o;
+            return this._id == that._id;
+        }
+        return false;
     }
 }
