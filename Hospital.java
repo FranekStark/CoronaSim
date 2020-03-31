@@ -44,7 +44,7 @@ public class Hospital {
      * @return enough place
      */
     public boolean hasEnoughPlace(int numberOfPatients){
-        int currentPatients = _treatments.size()
+        int currentPatients = _treatments.size();
         int  place = _maxSize - currentPatients;
         return numberOfPatients <= place;
     }

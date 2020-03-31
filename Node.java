@@ -1,6 +1,8 @@
 /**
- * Basetype Node
+ * Class for a base-type node. Nodes are connected to other nodes of the same type.
+ * Humans on a node can walk to one of the neighbors (left, right, top and bottom) in a time-step. 
  * 
+ * @version 30.03.2020
  * @author Finn Welzmüller, Franek Stark
  */
 public class Node {
@@ -11,7 +13,7 @@ public class Node {
     private static long cnt = 0;
 
     /**
-     * The NodeID
+     * The identifier of a node
      */
     private final long _id;
 
@@ -32,6 +34,9 @@ public class Node {
      */
     private final Node _topNeighbour;
 
+    /**
+     * Constructor of a node. Every node needs for neighbors
+     */
     public Node(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour) {
         _leftNeighbour = leftNeighbour;
         _rightNeighbour = rightNeighbour;
