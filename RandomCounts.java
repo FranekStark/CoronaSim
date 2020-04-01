@@ -16,7 +16,6 @@ public class RandomCounts{
      */
     public RandomCounts()
     {
-
     }
 
     /**
