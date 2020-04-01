@@ -1,4 +1,3 @@
-import java.util.*;
 /**
  * Representates a single human beeing with a specific age and identifier.
  * A possible pre-existing illness and the age can affect the course of desease
@@ -44,6 +43,11 @@ public class Human
     private int _deseaseDuration;
 
     /**
+     * The actual node the person stands on.
+     */
+    private LowestNode _actualNode;
+
+    /**
      * Home node of the person. Stays there when sick. 
      * Still can infect other people in this node when contagious.
      */
@@ -71,7 +75,7 @@ public class Human
         _isPreDeseased = isPreDeseased;
         _healthStatus = HealthStatus.HEALTY;
         _id = cnt;
-
+        _actualNode = _homeNode;
         // use random values!
         _deseaseDuration = 6;
     }
@@ -122,6 +126,15 @@ public class Human
     }
 
     /**
+     * Returns the actual node the person stands on.
+     * @return the actual node.
+     */
+    public LowestNode getActualNode()
+    {
+        return _actualNode;
+    }
+
+    /**
      * Returns the home node of the person.
      * @return the home node of the person.
      */
@@ -146,6 +159,16 @@ public class Human
     public void setSymptomsLevel(SymptomLevel newSymptomsLevel)
     {
         _symptomLevel = newSymptomsLevel;
+    }
+
+    /**
+     * Sets a new actual Node of the Person. 
+     * Must make sure that next Node is a neighbor of _actualNode!
+     * @param nextNode the next node the person will stand on.
+     */
+    public void setActualNode(LowestNode nextNode)
+    {
+        _actualNode = nextNode;
     }
 
     /**
