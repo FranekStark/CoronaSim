@@ -55,7 +55,7 @@ public class RandomCounts{
             throw new IllegalArgumentException("Lower border must be smaller than upper border");
         }        
         int count = dice.nextInt(101);
-        if(lowerBound < count && count < upperBound)
+        if(lowerBound <= count && count <= upperBound)
         {
             state = true;
         }
