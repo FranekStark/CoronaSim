@@ -120,7 +120,7 @@ public class Human
      * Returns the level of the symptoms of the person.
      * @return the level of the symptoms.
      */
-    public SymptomLevel getSymptomsLevel()
+    public SymptomLevel getSymptomLevel()
     {
         return _symptomLevel;
     }
@@ -156,9 +156,9 @@ public class Human
      * Changes the level of symptoms.
      * @param newSymptomsLevel the new level of symptoms.
      */
-    public void setSymptomsLevel(SymptomLevel newSymptomsLevel)
+    public void setSymptomsLevel(SymptomLevel newSymptomLevel)
     {
-        _symptomLevel = newSymptomsLevel;
+        _symptomLevel = newSymptomLevel;
     }
 
     /**
@@ -185,12 +185,14 @@ public class Human
         _deseaseDuration+= duration;
     }
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         return (int) _id;
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o)
+    {
         if (o instanceof Human){
             Human that = (Human) o;
             return this._id == that._id;
