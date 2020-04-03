@@ -189,25 +189,36 @@ public class Human
      * Overrides the actual node of the human by using a random direction to move.
      * No exceptions must be made for the edges or corners because of cyclic map.
      */
-    public void move()
+    public void moveToNode()
     {
-        if(RandomCounts.giveDirection() == 0)
+        int direction = RandomCounts.giveDirection();
+        if(direction == 0)
         {
             setActualNode(_actualNode._topNeighbor);
         }
-        if(RandomCounts.giveDirection() == 1)
+        if(direction == 1)
         {
             setActualNode(_actualNode._bottomNeighbor);
         }
-        if(RandomCounts.giveDirection() == 2)
+        if(direction == 2)
         {
             setActualNode(_actualNode._leftNeighbor);
         }
-        if(RandomCounts.giveDirection() == 3)
+        if(direction == 3)
         {
             setActualNode(_actualNode._rightNeighbor);
         }
     }
+
+    /**
+     * Let the person walk to his home node.
+     */
+    public void goHome()
+    {
+        _actualNode = _homeNode;
+    }
+
+
     @Override
     public int hashCode() 
     {

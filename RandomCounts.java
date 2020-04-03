@@ -26,7 +26,7 @@ public class RandomCounts{
      * 3 = moving to the right neighbor;
      * @return a random int between 0 and 3
      */
-    public int giveDirection()
+    public static int giveDirection()
     {
         Random dice = new Random();
         int direction = dice.nextInt(4);
@@ -41,7 +41,7 @@ public class RandomCounts{
      * @param upperBoundthe the upper bound of the interval for the random int to give a true statement.
      * @return the statement if the random number is between the boundaries or not.
      */
-    public boolean giveStatement(int lowerBound, int upperBound)
+    public static boolean giveStatement(int lowerBound, int upperBound)
     {
         Random dice = new Random();
         boolean state = false;
