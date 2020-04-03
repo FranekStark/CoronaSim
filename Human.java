@@ -184,6 +184,30 @@ public class Human
     {
         _deseaseDuration+= duration;
     }
+
+    /**
+     * Overrides the actual node of the human by using a random direction to move.
+     * No exceptions must be made for the edges or corners because of cyclic map.
+     */
+    public void move()
+    {
+        if(RandomCounts.giveDirection() == 0)
+        {
+            setActualNode(_actualNode._topNeighbor);
+        }
+        if(RandomCounts.giveDirection() == 1)
+        {
+            setActualNode(_actualNode._bottomNeighbor);
+        }
+        if(RandomCounts.giveDirection() == 2)
+        {
+            setActualNode(_actualNode._leftNeighbor);
+        }
+        if(RandomCounts.giveDirection() == 3)
+        {
+            setActualNode(_actualNode._rightNeighbor);
+        }
+    }
     @Override
     public int hashCode() 
     {
