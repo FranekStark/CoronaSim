@@ -1,3 +1,5 @@
+import java.security.acl.Group;
+
 /**
  * Class for a base-type node. Nodes are connected to other nodes of the same type.
  * Humans on a node can walk to one of the neighbors (left, right, top and bottom) in a time-step. 
@@ -35,13 +37,19 @@ public class Node {
     private final Node _topNeighbour;
 
     /**
+     * The fathe of that Node
+     */
+    private final GroupingNode _fartherNode;
+
+    /**
      * Constructor of a node. Every node needs for neighbors
      */
-    public Node(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour) {
+    public Node(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode) {
         _leftNeighbour = leftNeighbour;
         _rightNeighbour = rightNeighbour;
         _bottomNeighbour = bottomNeighbour;
         _topNeighbour = topNeighbour;
+        _fartherNode = fatherNode;
         _id = cnt++;
     }
 
@@ -79,6 +87,13 @@ public class Node {
      */
     public Node getBottomNeighbour() {
         return _bottomNeighbour;
+    }
+    /**
+     * Returns the father of that Node
+     * @return father of the Node
+     */
+    public Node getFatherNode(){
+        return _fartherNode;
     }
 
     @Override
