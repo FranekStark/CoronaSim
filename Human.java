@@ -191,23 +191,7 @@ public class Human
      */
     public void moveToNode()
     {
-        int direction = RandomCounts.giveDirection();
-        if(direction == 0)
-        {
-            setActualNode(_actualNode._topNeighbor);
-        }
-        if(direction == 1)
-        {
-            setActualNode(_actualNode._bottomNeighbor);
-        }
-        if(direction == 2)
-        {
-            setActualNode(_actualNode._leftNeighbor);
-        }
-        if(direction == 3)
-        {
-            setActualNode(_actualNode._rightNeighbor);
-        }
+       _actualNode = (LowestNode)_actualNode.getNeighbourNode(RandomCounts.getRandomDirection());
     }
 
     /**

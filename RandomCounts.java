@@ -18,19 +18,15 @@ public class RandomCounts{
     {
     }
 
-    /**
-     * Gives a random int beween 0 and 3 for a humans decision while moving to the next neighbor node.
-     * 0 = moving to the top neighbor;
-     * 1 = moving to the bottom neighbor;
-     * 2 = moving to the left neighbor;
-     * 3 = moving to the right neighbor;
-     * @return a random int between 0 and 3
-     */
-    public static int giveDirection()
+    public static int giveRandomNumber(int bound)
     {
         Random dice = new Random();
-        int direction = dice.nextInt(4);
+        int direction = dice.nextInt(bound);
         return direction;
+    }
+
+    static Direction getRandomDirection(){
+        return Direction.values()[giveRandomNumber(4)];
     }
 
     /**

@@ -54,46 +54,25 @@ public class Node {
     }
 
     /**
-     * Returns the left Neighbour of that Node
-     * 
-     * @return left Neighbour
-     */
-    public Node getLeftNeighbour() {
-        return _leftNeighbour;
-    }
-
-    /**
-     * Returns the right Neighbour of that Node
-     * 
-     * @return right Neighbour
-     */
-    public Node getRightNeighbour() {
-        return _rightNeighbour;
-    }
-
-    /**
-     * Returns the top Neighbour of that Node
-     * 
-     * @return top Neighbour
-     */
-    public Node getTopNeighbour() {
-        return _topNeighbour;
-    }
-
-    /**
-     * Returns the bottom Neighbour of that Node
-     * 
-     * @return bottom Neighbour
-     */
-    public Node getBottomNeighbour() {
-        return _bottomNeighbour;
-    }
-    /**
      * Returns the father of that Node
      * @return father of the Node
      */
     public Node getFatherNode(){
         return _fartherNode;
+    }
+
+    public Node getNeighbourNode(Direction direction){
+        switch (direction){
+            case LEFT:
+                return _leftNeighbour;
+            case RIGHT:
+                return _rightNeighbour;
+            case TOP:
+                return _topNeighbour;
+            case BOTTOM:  
+            default:
+                return _bottomNeighbour;   
+        }
     }
 
     @Override

@@ -15,4 +15,5 @@ public class LowestNode extends Node {
     public LowestNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode) {
         super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
     }
+
 }

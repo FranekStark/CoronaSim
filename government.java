@@ -1,4 +1,4 @@
-public static class government
+public static class Government
 {  
-    private int _maxTreeLevelExceeding;
+    private static int _maxTreeLevelExceeding;
 }
