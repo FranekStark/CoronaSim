@@ -20,10 +20,13 @@ public class LowestNode extends Node {
     {
         int level = 0;
 
-        while(!super.getFatherNode().equals(otherNode.getFatherNode()) && super.getFatherNode()!= null)
-        {
-            level+=1;
-            super.getFatherNode().getLevelRelation(otherNode.getFatherNode());
+        Node thisFather = this.getFatherNode();
+        Node otherFather = otherNode.getFatherNode();
+
+        while(!thisFather.equals(otherFather)){
+            level++;
+            thisFather = thisFather.getFatherNode();
+            otherFather = otherFather.getFatherNode();
         }
 
         return level;
