@@ -16,4 +16,18 @@ public class LowestNode extends Node {
         super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
     }
 
+    public int getLevelRelation(Node otherNode)
+    {
+        int level = 0;
+
+        while(!super.getFatherNode().equals(otherNode.getFatherNode()) && super.getFatherNode()!= null)
+        {
+            level+=1;
+            super.getFatherNode().getLevelRelation(otherNode.getFatherNode());
+        }
+
+        return level;
+    }
+ 
+
 }
