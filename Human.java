@@ -13,8 +13,13 @@
  * @author (Franek Stark, Finn Welzmüller) 
  * @version (30.03.2020)
  */
-public class Human
+public class Human implements Tickable
 {
+
+    /**
+     * The Government which this Human relates to
+     */
+    private final Government _government;
 
     /**
      * The Counter of all Persons to set the Identifier
@@ -27,15 +32,15 @@ public class Human
     private final long _id;
 
     /**
-     * The age of the person determined by an age distribution. 
-     * The age affects the course of desease and the likelihood of death.
+     * The age of the person determined by an age distribution. The age affects the
+     * course of desease and the likelihood of death.
      */
     private final int _age;
 
     /**
      * The possible pre-existing lung desease can affect the ouse of desease.
      */
-    private boolean _isPreDeseased;
+    private final boolean _isPreDeseased;
 
     /**
      * The duration of the COVID-19 desease.
@@ -48,14 +53,13 @@ public class Human
     private LowestNode _actualNode;
 
     /**
-     * Home node of the person. Stays there when sick. 
-     * Still can infect other people in this node when contagious.
+     * Home node of the person. Stays there when sick. Still can infect other people
+     * in this node when contagious.
      */
     private LowestNode _homeNode;
 
-
     /**
-     * Describes the health status of the person. 
+     * Describes the health status of the person.
      */
     private HealthStatus _healthStatus;
 
@@ -66,156 +70,162 @@ public class Human
 
     /**
      * Constructor of healthy Human.
-     * @param age: Age of the human. Will be given by an external age distribution.
+     * 
+     * @param age:           Age of the human. Will be given by an external age
+     *                       distribution.
      * @param isPreDeseased: Shows if the person has a pre-existing lung desease.
      */
-    public Human(int age, boolean isPreDeseased)
-    {
+    public Human(final int age, final boolean isPreDeseased, final Government government) {
         _age = age;
         _isPreDeseased = isPreDeseased;
         _healthStatus = HealthStatus.HEALTY;
         _id = cnt;
         _actualNode = _homeNode;
-        // use random values!
-        _deseaseDuration = 6;
+        _government = government;
+        _deseaseDuration = 6; // TODO: use random values!
     }
 
     /**
      * Returns the age of the person.
+     * 
      * @return the age of the human
      */
-    public int getAge()
-    {
+    public int getAge() {
         return _age;
     }
 
     /**
      * Returns if the person has a pre-existing lung desease (not COVID-19).
+     * 
      * @return the person has a pre-existing lung desease or not.
      */
-    public boolean isPreDeseased()
-    {
+    public boolean isPreDeseased() {
         return _isPreDeseased;
     }
 
     /**
      * Returns the duration of the COVID-19 desease.
+     * 
      * @return the duration of the COVID-19 desease.
      */
-    public int getDeseaseDuration()
-    {
+    public int getDeseaseDuration() {
         return _deseaseDuration;
     }
 
     /**
      * Returns the health status of the person in regard to COVID-19.
+     * 
      * @return the actual health status.
      */
-    public HealthStatus getHealthStatus()
-    {
+    public HealthStatus getHealthStatus() {
         return _healthStatus;
     }
 
     /**
      * Returns the level of the symptoms of the person.
+     * 
      * @return the level of the symptoms.
      */
-    public SymptomLevel getSymptomLevel()
-    {
+    public SymptomLevel getSymptomLevel() {
         return _symptomLevel;
     }
 
     /**
      * Returns the actual node the person stands on.
+     * 
      * @return the actual node.
      */
-    public LowestNode getActualNode()
-    {
+    public LowestNode getActualNode() {
         return _actualNode;
     }
 
     /**
      * Returns the home node of the person.
+     * 
      * @return the home node of the person.
      */
-    public LowestNode getHomeNode()
-    {
+    public LowestNode getHomeNode() {
         return _homeNode;
     }
 
     /**
      * Changes the health status of the person.
+     * 
      * @param newHealthStatus the new health status.
      */
-    public void setHealthStatus(HealthStatus newHealthStatus)
-    {
+    public void setHealthStatus(final HealthStatus newHealthStatus) {
         _healthStatus = newHealthStatus;
     }
 
     /**
      * Changes the level of symptoms.
+     * 
      * @param newSymptomsLevel the new level of symptoms.
      */
-    public void setSymptomsLevel(SymptomLevel newSymptomLevel)
-    {
+    public void setSymptomsLevel(final SymptomLevel newSymptomLevel) {
         _symptomLevel = newSymptomLevel;
     }
 
     /**
-     * Sets a new actual Node of the Person. 
-     * Must make sure that next Node is a neighbor of _actualNode!
+     * Sets a new actual Node of the Person. Must make sure that next Node is a
+     * neighbor of _actualNode!
+     * 
      * @param nextNode the next node the person will stand on.
      */
-    public void setActualNode(LowestNode nextNode)
-    {
+    public void setActualNode(final LowestNode nextNode) {
         _actualNode = nextNode;
     }
 
     /**
-     * Increments the desease duration by a value between 0 and 22. 
-     * 2 ticks = 1 day
-     * The minimal duration is 3 days (6 ticks) which is a increment 
-     * of the default value of 0 ticks.
-     * The maximal duration value is 14 days (28 ticks) which is a 
+     * Increments the desease duration by a value between 0 and 22. 2 ticks = 1 day
+     * The minimal duration is 3 days (6 ticks) which is a increment of the default
+     * value of 0 ticks. The maximal duration value is 14 days (28 ticks) which is a
      * of the default value of increment of 22 ticks.
+     * 
      * @param duration the new desease duration.
      */
-    public void incrementDeseaseDuration(int duration)
-    {
-        _deseaseDuration+= duration;
+    public void incrementDeseaseDuration(final int duration) {
+        _deseaseDuration += duration;
     }
 
     /**
      * Overrides the actual node of the human by using a random direction to move.
      * No exceptions must be made for the edges or corners because of cyclic map.
      */
-    public void moveToNode()
-    {
-       _actualNode = (LowestNode)_actualNode.getNeighbourNode(RandomCounts.getRandomDirection());
+    public boolean moveToNode(final LowestNode nextNode) {
+        final int levelRelation = _actualNode.getLevelRelation(nextNode);
+
+        if (levelRelation <= _government.getMaxTreeLevel()) {
+            _actualNode = nextNode;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * Let the person walk to his home node.
      */
-    public void goHome()
-    {
+    public void goHome() {
         _actualNode = _homeNode;
     }
 
-
     @Override
-    public int hashCode() 
-    {
+    public int hashCode() {
         return (int) _id;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (o instanceof Human){
-            Human that = (Human) o;
+    public boolean equals(final Object o) {
+        if (o instanceof Human) {
+            final Human that = (Human) o;
             return this._id == that._id;
         }
         return false;
+    }
+
+    @Override
+    public void tick() {
+        //TODO: Implement
     }
 }
