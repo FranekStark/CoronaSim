@@ -1,18 +1,10 @@
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * The Group-Node derives from the Node and has Subnodes.
  * @author Finn Welzmüller, Franek Stark
  */
 public class GroupingNode extends Node {
 
-    /**
-     * This Set Contains the Subnodes
-     */
-    private final Set<Node> _subNodes;
-
-    /**
+     /**
      * The Hospital of that Node or Null;
      */
     private final Hospital _hospital;
@@ -24,27 +16,13 @@ public class GroupingNode extends Node {
      * @param rightNeighbour right Neighbour
      * @param topNeighbour top Neighbour
      * @param bottomNeighbour botoom Neighbour
+     * @param fatherNode father Node
      * 
      * @param hospital hospital or Null if it contains no Hospital
      */
-    public GroupingNode(Hospital hospital, Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour,
-            Node... subNodes) {
-        super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour);
-        _subNodes = new HashSet<>();
-        for (Node node : subNodes) {
-            _subNodes.add(node);
-        }
+    public GroupingNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode, Hospital hospital) {
+        super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
         _hospital = hospital;
-
-    }
-
-    /**
-     * Returns a new Set which contains all SubNodes.
-     * 
-     * @return new Set
-     */
-    public Set<Node> GetSubNodes(){
-        return new HashSet<>(_subNodes);
     }
 
     /**
