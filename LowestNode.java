@@ -1,6 +1,7 @@
-public class LowestNode extends Node {
+import java.util.HashSet;
+public class LowestNode extends Node implements Tickable{
     
-
+    HashSet<Human> humans = new HashSet<Human>();
     /**
      * Constructs a new LowestNode with its Neighbours, SubNodes and a Hospital.
      * 
@@ -15,12 +16,16 @@ public class LowestNode extends Node {
     public LowestNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode) {
         super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
     }
-
+    /**
+     * returns the relationship level of two nodes.
+     * @param otherNode: the partner node
+     * @return the relationship level 
+     */
     public int getLevelRelation(Node otherNode)
     {
         int level = 0;
 
-        Node thisFather = this.getFatherNode();
+        Node thisFather = getFatherNode();
         Node otherFather = otherNode.getFatherNode();
 
         while(!thisFather.equals(otherFather)){
@@ -31,6 +36,56 @@ public class LowestNode extends Node {
 
         return level;
     }
- 
+    /**
+     * Let a human enter the node
+     * @param human 
+     */
+    public void enterNode(Human human)
+    {
+        humans.add(human);
+    }
 
+    /**
+     * Let a human leave the node
+     * @param human
+     */
+    public void leaveNode(Human human)
+    {
+        humans.remove(human);
+    }
+    /**
+     * returns the set of humans.
+     */
+    public HashSet<Human> getHumans()
+    {
+        return humans;
+    }
+
+    /**
+     * tick method for the LowestNode class
+     */
+    @Override
+    public void tick()
+    {
+        boolean infected = false;
+        //loop every person in the cell and check if they're contagious. (ILL != CONTAGIOUS?).
+        for (Human human : humans)
+        {
+            if((human.getHealthStatus() == HealthStatus.CONTAGIOUS) || (human.getHealthStatus() == HealthStatus.ILL))
+            {
+                infected = true;
+            }
+        }
+        //if someone in the cell is contagious, everyone else will be infected. Here with a likelihood of 70 %
+        if (infected)
+        {   
+            for (Human human : humans)
+            {
+                if (RandomCounts.giveStatement(0, 70))
+                {
+                    human.setHealthStatus(HealthStatus.CONTAGIOUS);
+                }
+            }
+        }
+    }
 }

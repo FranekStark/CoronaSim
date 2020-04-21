@@ -17,4 +17,7 @@ public static void main(int simulatedDays)
         }
     }
     
+
 }
+
+
