@@ -204,6 +204,21 @@ public class Human implements Tickable
             return false;
         }
     }
+    public boolean moveToHospital(){
+        
+        if (_actualNode.getFatherNode().hasHospital() && _actualNode.getFatherNode().getHospital().hasEnoughPlace(1)){
+            _actualNode.leaveNode(this);
+            _actualNode = null;
+            _actualNode.getFatherNode().getHospital().sickHuman(this);
+        }
+        else
+        {
+            
+        }
+
+
+        return false;
+    }
 
     /**
      * Let the person walk to his home node.
@@ -230,7 +245,7 @@ public class Human implements Tickable
 
     @Override
     public void tick() {
-        //TODO: Implement with increment _illCounter
+        //TODO: Implement with increment 
     }
     
     public void infect() {
