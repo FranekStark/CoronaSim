@@ -1,4 +1,10 @@
+import java.security.cert.CollectionCertStoreParameters;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 /**
  * Gives random ints to find random direction and probability of infection.
  * Methods of this class will give random directions or a random boolean weighted by a 
@@ -27,6 +33,12 @@ public class RandomCounts{
 
     static Direction getRandomDirection(){
         return Direction.values()[giveRandomNumber(4)];
+    }
+
+    static <T> T getRandomElement(Set<T> element){
+        List<T> elementlist = new ArrayList<T>(element);
+        Collections.shuffle(elementlist);
+        return elementlist.get(0);
     }
 
     /**

@@ -1,5 +1,22 @@
 import java.util.HashSet;
 public class LowestNode extends Node implements Tickable{
+
+     /**
+     * Left Neighbournode
+     */
+    private final LowestNode _leftNeighbour;
+    /**
+     * Right Neighbournode
+     */
+    private final LowestNode _rightNeighbour;
+    /**
+     * Bottom Neighbournode
+     */
+    private final LowestNode _bottomNeighbour;
+    /**
+     * Top Neighbournode
+     */
+    private final LowestNode _topNeighbour;
     
     HashSet<Human> humans = new HashSet<Human>();
     /**
@@ -13,9 +30,28 @@ public class LowestNode extends Node implements Tickable{
      * 
      * @param hospital hospital or Null if it contains no Hospital
      */
-    public LowestNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode) {
-        super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
+    public LowestNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fartherNode) {
+        super(fartherNode);
+        _leftNeighbour = leftNeighbour;
+        _rightNeighbour = rightNeighbour;
+        _bottomNeighbour = bottomNeighbour;
+        _topNeighbour = topNeighbour;  
     }
+
+    public LowestNode getNeighbourNode(Direction direction){
+        switch (direction){
+            case LEFT:
+                return _leftNeighbour;
+            case RIGHT:
+                return _rightNeighbour;
+            case TOP:
+                return _topNeighbour;
+            case BOTTOM:  
+            default:
+                return _bottomNeighbour;   
+        }
+    }
+
     /**
      * returns the relationship level of two nodes.
      * @param otherNode: the partner node

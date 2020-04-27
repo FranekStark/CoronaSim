@@ -12,16 +12,12 @@ public class GroupingNode extends Node {
     /**
      * Constructs a new GroupingNode with its Neighbours, SubNodes and a Hospital.
      * 
-     * @param leftNeighbour left Neighbour
-     * @param rightNeighbour right Neighbour
-     * @param topNeighbour top Neighbour
-     * @param bottomNeighbour botoom Neighbour
      * @param fatherNode father Node
      * 
      * @param hospital hospital or Null if it contains no Hospital
      */
-    public GroupingNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode, Hospital hospital) {
-        super(leftNeighbour, rightNeighbour, bottomNeighbour, topNeighbour, fatherNode);
+    public GroupingNode(GroupingNode fatherNode, Hospital hospital) {
+        super(fatherNode);
         _hospital = hospital;
     }
 

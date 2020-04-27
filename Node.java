@@ -19,23 +19,7 @@ public class Node {
      */
     private final long _id;
 
-    /**
-     * Left Neighbournode
-     */
-    private final Node _leftNeighbour;
-    /**
-     * Right Neighbournode
-     */
-    private final Node _rightNeighbour;
-    /**
-     * Bottom Neighbournode
-     */
-    private final Node _bottomNeighbour;
-    /**
-     * Top Neighbournode
-     */
-    private final Node _topNeighbour;
-
+   
     /**
      * The fathe of that Node
      */
@@ -44,11 +28,7 @@ public class Node {
     /**
      * Constructor of a node. Every node needs for neighbors
      */
-    public Node(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fatherNode) {
-        _leftNeighbour = leftNeighbour;
-        _rightNeighbour = rightNeighbour;
-        _bottomNeighbour = bottomNeighbour;
-        _topNeighbour = topNeighbour;
+    public Node( GroupingNode fatherNode) {
         _fartherNode = fatherNode;
         _id = cnt++;
     }
@@ -57,23 +37,11 @@ public class Node {
      * Returns the father of that Node
      * @return father of the Node
      */
-    public Node getFatherNode(){
+    public GroupingNode getFatherNode(){
         return _fartherNode;
     }
 
-    public Node getNeighbourNode(Direction direction){
-        switch (direction){
-            case LEFT:
-                return _leftNeighbour;
-            case RIGHT:
-                return _rightNeighbour;
-            case TOP:
-                return _topNeighbour;
-            case BOTTOM:  
-            default:
-                return _bottomNeighbour;   
-        }
-    }
+ 
 
     @Override
     public int hashCode() {

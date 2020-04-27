@@ -1,20 +1,23 @@
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * Representates a single human beeing with a specific age and identifier.
- * A possible pre-existing illness and the age can affect the course of desease
- * as well as the age. A person has also a home node to stay in when ill.
- * A person can be healthy, contagious (no symptoms but can infect other people 
- * sitting in the same node), ill (with symptoms and affection of the movement),
- * recovered (healthy and imune to COVID-19) or dead. 
- * The person can have mild symptoms (quarantine at home), heavy symptoms 
- * (quarantine in hospital and age-depending chance to die) or no symptoms at all.
+ * Representates a single human beeing with a specific age and identifier. A
+ * possible pre-existing illness and the age can affect the course of desease as
+ * well as the age. A person has also a home node to stay in when ill. A person
+ * can be healthy, contagious (no symptoms but can infect other people sitting
+ * in the same node), ill (with symptoms and affection of the movement),
+ * recovered (healthy and imune to COVID-19) or dead. The person can have mild
+ * symptoms (quarantine at home), heavy symptoms (quarantine in hospital and
+ * age-depending chance to die) or no symptoms at all.
  * 
  * 
  * 
- * @author (Franek Stark, Finn Welzmüller) 
+ * @author (Franek Stark, Finn Welzmüller)
  * @version (30.03.2020)
  */
-public class Human implements Tickable
-{
+public class Human implements Tickable {
 
     /**
      * The Government which this Human relates to
@@ -104,15 +107,6 @@ public class Human implements Tickable
     }
 
     /**
-     * Returns the duration of the COVID-19 desease.
-     * 
-     * @return the duration of the COVID-19 desease.
-     */
-    public int getDeseaseDuration() {
-        return _deseaseDuration;
-    }
-
-    /**
      * Returns the health status of the person in regard to COVID-19.
      * 
      * @return the actual health status.
@@ -177,18 +171,6 @@ public class Human implements Tickable
     }
 
     /**
-     * Increments the desease duration by a value between 0 and 22. 2 ticks = 1 day
-     * The minimal duration is 3 days (6 ticks) which is a increment of the default
-     * value of 0 ticks. The maximal duration value is 14 days (28 ticks) which is a
-     * of the default value of increment of 22 ticks.
-     * 
-     * @param duration the new desease duration.
-     */
-    public void incrementDeseaseDuration(final int duration) {
-        _deseaseDuration += duration;
-    }
-
-    /**
      * Overrides the actual node of the human by using a random direction to move.
      * No exceptions must be made for the edges or corners because of cyclic map.
      */
@@ -201,6 +183,10 @@ public class Human implements Tickable
         } else {
             return false;
         }
+    }
+
+    public void updateHealth() {
+        //TODO: IMPLEMENT
     }
 
     /**
@@ -226,6 +212,25 @@ public class Human implements Tickable
 
     @Override
     public void tick() {
-        //TODO: Implement
+        updateHealth();
+        switch(_symptomLevel){
+            case HEAVY:
+                //TODO: MovetoHospital
+            break;
+            case MILD:
+                goHome();
+            break;
+            case NO:
+                Direction direction;
+                do{
+                    Set<Direction> directions = new HashSet<Direction>(Arrays.asList(Direction.values()));
+                    if(directions.isEmpty()){
+                        throw new IllegalStateException("No direction to move");
+                    }
+                    direction = RandomCounts.getRandomElement(directions);
+                    directions.remove(direction);
+                }while(moveToNode(_actualNode.getNeighbourNode(direction))); 
+            break;
+        }
     }
 }
