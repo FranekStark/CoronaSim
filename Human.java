@@ -226,6 +226,14 @@ public class Human implements Tickable
 
     @Override
     public void tick() {
-        //TODO: Implement
+        //TODO: Implement with increment _illCounter
+    }
+    
+    public void infect() {
+       if (_healthStatus == HealthStatus.HEALTY)
+       {
+            _deseaseDuration = 0;
+            setHealthStatus(HealthStatus.CONTAGIOUS);
+       }
     }
 }
