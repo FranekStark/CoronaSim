@@ -196,6 +196,8 @@ public class Human implements Tickable
         final int levelRelation = _actualNode.getLevelRelation(nextNode);
 
         if (levelRelation <= _government.getMaxTreeLevel()) {
+            _actualNode.leaveNode(this);
+            nextNode.enterNode(this);
             _actualNode = nextNode;
             return true;
         } else {
@@ -207,6 +209,8 @@ public class Human implements Tickable
      * Let the person walk to his home node.
      */
     public void goHome() {
+        _actualNode.leaveNode(this);
+        _homeNode.enterNode(this);
         _actualNode = _homeNode;
     }
 
