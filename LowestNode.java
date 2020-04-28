@@ -107,7 +107,7 @@ public class LowestNode extends Node implements Tickable{
         //loop every person in the cell and check if they're contagious. (ILL != CONTAGIOUS?).
         for (Human human : humans)
         {
-            if((human.getHealthStatus() == HealthStatus.CONTAGIOUS) || (human.getHealthStatus() == HealthStatus.ILL))
+            if((human.getHealthStatus() == HealthStatus.CONTAGIOUS))
             {
                 infected = true;
             }
@@ -117,9 +117,9 @@ public class LowestNode extends Node implements Tickable{
         {   
             for (Human human : humans)
             {
-                if (RandomCounts.giveStatement(0, 70))
+                if (RandomCounts.giveStatement(0, MedicalSettings.infection_probability))
                 {
-                    human.setHealthStatus(HealthStatus.CONTAGIOUS);
+                    human.infect();
                 }
             }
         }

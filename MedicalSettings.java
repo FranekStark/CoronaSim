@@ -8,5 +8,5 @@ public class MedicalSettings {
      */
     public static int infection_duration = 14; //In ticks
 
-
+    public static int infection_probability = 70; //In %
 }

@@ -178,12 +178,35 @@ public class Human implements Tickable {
         final int levelRelation = _actualNode.getLevelRelation(nextNode);
 
         if (levelRelation <= _government.getMaxTreeLevel()) {
+            _actualNode.leaveNode(this);
+            nextNode.enterNode(this);
             _actualNode = nextNode;
             return true;
         } else {
             return false;
         }
     }
+
+
+    private boolean moveToHospital(){
+        GroupingNode fartherNode = _actualNode.getFatherNode();
+
+        while(!fartherNode.hasHospital() && !fartherNode.getHospital().hasEnoughPlace(1)){
+            fartherNode.getFatherNode();
+            
+            if (fartherNode == null) {
+                return false;
+            }
+        }
+        //Hospital found
+        fartherNode.getHospital().treatSickHuman(this);
+        _actualNode = null;
+        
+        return true;
+        
+    }
+
+
 
     public void updateHealth() {
         //TODO: IMPLEMENT
@@ -193,6 +216,8 @@ public class Human implements Tickable {
      * Let the person walk to his home node.
      */
     public void goHome() {
+        _actualNode.leaveNode(this);
+        _homeNode.enterNode(this);
         _actualNode = _homeNode;
     }
 
@@ -215,7 +240,11 @@ public class Human implements Tickable {
         updateHealth();
         switch(_symptomLevel){
             case HEAVY:
-                //TODO: MovetoHospital
+            if(moveToHospital()){
+
+            }else{
+                goHome();
+            }
             break;
             case MILD:
                 goHome();
@@ -232,5 +261,15 @@ public class Human implements Tickable {
                 }while(moveToNode(_actualNode.getNeighbourNode(direction))); 
             break;
         }
+
+    }
+    
+    public void infect() {
+       if (_healthStatus == HealthStatus.HEALTY)
+       {
+            _deseaseDuration = 0;
+            setHealthStatus(HealthStatus.CONTAGIOUS);
+       }
+
     }
 }
