@@ -30,7 +30,7 @@ public class LowestNode extends Node implements Tickable{
      * 
      * @param hospital hospital or Null if it contains no Hospital
      */
-    public LowestNode(Node leftNeighbour, Node rightNeighbour, Node bottomNeighbour, Node topNeighbour, GroupingNode fartherNode) {
+    public LowestNode(LowestNode leftNeighbour, LowestNode rightNeighbour, LowestNode bottomNeighbour, LowestNode topNeighbour, GroupingNode fartherNode) {
         super(fartherNode);
         _leftNeighbour = leftNeighbour;
         _rightNeighbour = rightNeighbour;

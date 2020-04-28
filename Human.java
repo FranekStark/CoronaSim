@@ -192,7 +192,7 @@ public class Human implements Tickable {
         GroupingNode fartherNode = _actualNode.getFatherNode();
 
         while(!fartherNode.hasHospital() && !fartherNode.getHospital().hasEnoughPlace(1)){
-            fartherNode.getFatherNode();
+            fartherNode = fartherNode.getFatherNode();
             
             if (fartherNode == null) {
                 return false;
