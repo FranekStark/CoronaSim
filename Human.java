@@ -212,7 +212,7 @@ public class Human implements Tickable {
         GroupingNode fartherNode = _actualNode.getFatherNode();
 
         while(!fartherNode.hasHospital() && !fartherNode.getHospital().hasEnoughPlace(1)){
-            fartherNode = fartherNode.getFatherNode();
+            fartherNode.getFatherNode();
             
             if (fartherNode == null) {
                 return false;
@@ -307,7 +307,7 @@ public class Human implements Tickable {
         }
 
     }
-    
+        
     public void infect() {
        if (_healthStatus == HealthStatus.HEALTY)
        {
@@ -315,5 +315,6 @@ public class Human implements Tickable {
             setHealthStatus(HealthStatus.CONTAGIOUS);
        }
 
-    }
+     //TODO: Wahrscheinlichkeit für MILD/HEAVY SYMPTOMS?
+     //TODO: Wahrscheinlichkeit für RECOVERED/DEAD?
 }
