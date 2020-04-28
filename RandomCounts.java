@@ -66,4 +66,16 @@ public class RandomCounts{
         }
         return state;
     }
+
+    /**
+     * return gaussian random number with
+     * @param mean 
+     * @param std
+     * @return gaussian distributed value
+     */
+    public static double giveGaussianValue(double mean, double std)
+    {
+        Random dice = new Random();
+        return mean + std*dice.nextGaussian();
+    }
 }
