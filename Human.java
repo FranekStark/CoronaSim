@@ -48,7 +48,17 @@ public class Human implements Tickable {
     /**
      * The duration of the COVID-19 desease.
      */
-    private int _deseaseDuration;
+    private final int  _deseaseDuration;
+
+    private final int _latentTime;
+
+    private final int _incubationTime;
+
+    private  int _deseaseCounter;
+
+    private final int _timeInHospital;
+
+
 
     /**
      * The actual node the person stands on.
@@ -71,6 +81,11 @@ public class Human implements Tickable {
      */
     private SymptomLevel _symptomLevel;
 
+
+
+
+
+
     /**
      * Constructor of healthy Human.
      * 
@@ -85,7 +100,7 @@ public class Human implements Tickable {
         _id = cnt;
         _actualNode = _homeNode;
         _government = government;
-        _deseaseDuration = 6; // TODO: use random values!
+
     }
 
     /**
@@ -95,6 +110,11 @@ public class Human implements Tickable {
      */
     public int getAge() {
         return _age;
+    }
+
+
+    public int getTimeInHospital(){
+        return _timeInHospital;
     }
 
     /**
@@ -209,7 +229,31 @@ public class Human implements Tickable {
 
 
     public void updateHealth() {
-        //TODO: IMPLEMENT
+        switch (_healthStatus){
+            case HEALTY: case DEAD: case RECOVERED: {
+                //Nothing
+            }break;
+            case INFECTED:{
+                _deseaseCounter++;
+                if(_deseaseCounter >= _latentTime){
+                    _healthStatus = HealthStatus.CONTAGIOUS;
+                }
+            }break;
+            case CONTAGIOUS:{
+                _deseaseCounter++;
+                if(_deseaseCounter >= (_incubationTime)){
+                    _healthStatus = HealthStatus.ILL;
+                    //TODO: SELECT Symptoms
+                }
+            }break;
+            case ILL:{
+                _deseaseCounter++;
+                if(_deseaseCounter >= (_deseaseDuration)){
+                    //TODO: SELECT DEad or Recovered
+                }
+            }break;
+            
+        }
     }
 
     /**
@@ -252,7 +296,7 @@ public class Human implements Tickable {
             case NO:
                 Direction direction;
                 do{
-                    Set<Direction> directions = new HashSet<Direction>(Arrays.asList(Direction.values()));
+                    final Set<Direction> directions = new HashSet<Direction>(Arrays.asList(Direction.values()));
                     if(directions.isEmpty()){
                         throw new IllegalStateException("No direction to move");
                     }
@@ -267,7 +311,7 @@ public class Human implements Tickable {
     public void infect() {
        if (_healthStatus == HealthStatus.HEALTY)
        {
-            _deseaseDuration = 0;
+            _deseaseCounter = 0;
             setHealthStatus(HealthStatus.CONTAGIOUS);
        }
 
