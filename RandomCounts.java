@@ -106,4 +106,13 @@ public class RandomCounts{
         return (MedicalSettings.medical_factor/0.9) * (8/646) * 1/(Math.exp((-age - 50 - 25 * predeseased)/10) + 1) - ITS * (1.28/646);
         
     }
+
+    public static double symptoms_probability(int age, boolean isPreDeseased){
+        int predeseased = 0;
+        if (isPreDeseased)
+        {
+            predeseased = 1;
+        }
+        return (32/4893) * 1/(Math.exp((- age - 50 - 25 * predeseased)/20) + 1);
+    }
 }
