@@ -214,7 +214,8 @@ public class Human implements Tickable {
         while(!fartherNode.hasHospital() && !fartherNode.getHospital().hasEnoughPlace(1)){
             fartherNode.getFatherNode();
             
-            if (fartherNode == null) {
+            if (fartherNode == null) 
+            {
                 return false;
             }
         }
@@ -316,5 +317,5 @@ public class Human implements Tickable {
        }
 
      //TODO: Wahrscheinlichkeit für MILD/HEAVY SYMPTOMS?
-     //TODO: Wahrscheinlichkeit für RECOVERED/DEAD?
+    }
 }
