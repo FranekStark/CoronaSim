@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -5,7 +6,7 @@ import java.util.Set;
  * 
  * @author Finn Welzmüller, Franek Stark
  */
-public class Hospital {
+public class Hospital implements Tickable {
 
     /**
      * The number of Hospitals, to count the id
@@ -62,12 +63,6 @@ public class Hospital {
         _treatments.add(new Treatment(sickHuman));
     }
 
-    /**
-     * Reetrieves all 
-     */
-    public void retreiveHealedHuman(){
-
-    }
 
     @Override
     public int hashCode() {
@@ -81,6 +76,22 @@ public class Hospital {
             return this._id == that._id;
         }
         return false;
+    }
+
+    @Override
+    public void tick() {
+        Set<Treatment> toRemove = new HashSet<>();
+
+        for (Treatment treatment : _treatments) {
+            treatment.incrementDuration(1);
+            if(treatment.GetDuration() >= treatment.getPatient().getTimeInHospital() || treatment.getPatient().getHealthStatus() == HealthStatus.RECOVERED){
+                toRemove.add(treatment);
+            }
+        }
+
+        for (Treatment treatment : toRemove) {
+            _treatments.remove(treatment);
+        }
     }
 
 }
