@@ -1,17 +1,23 @@
 
 /**
- * This Class contains all Magic-Numbers which regards the medical topic
+ * This Class contains all Magic-Numbers regarding the medical system.
  */
 public class MedicalSettings {
 
-    
     /**
-     * How many ticks is a infection long
-     */
-    public static int infection_duration = 14; //In ticks
+     * Describes the medical situation. 1 for the best medical system, 0 for the badest.
+     * Affects the recoverey of people with heavy symptoms.
+     **/
+    public static double medical_factor = 0.9;
 
+    /**
+     * Describes the likelihood of infection if a healthy human is on the same cell with a infected one.
+     */
     public static int infection_probability = 70; //In %
 
+    /**
+     * Describes the likelihood of infection after recovery: 0 for COVID-19
+     */
     public static int reinfection_probability = 0; //In %
 
     /**

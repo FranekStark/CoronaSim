@@ -3,6 +3,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.lang.Math;
 /**
  * Gives random ints to find random direction and probability of infection.
  * Methods of this class will give random directions or a random boolean weighted by a 
@@ -21,18 +22,24 @@ public class RandomCounts{
     public RandomCounts()
     {
     }
-
+    /**
+     * gives a random number under a given boundary
+     */
     public static int giveRandomNumber(int bound)
     {
         Random dice = new Random();
         int direction = dice.nextInt(bound);
         return direction;
     }
-
+    /**
+     * gives a random direction for moving.
+     */
     static Direction getRandomDirection(){
         return Direction.values()[giveRandomNumber(4)];
     }
-
+    /**
+     * gives a random element of a set with elements.
+    */
     static <T> T getRandomElement(Set<T> element){
         List<T> elementlist = new ArrayList<T>(element);
         Collections.shuffle(elementlist);
@@ -68,7 +75,7 @@ public class RandomCounts{
     }
 
     /**
-     * return gaussian random number with
+     * returns gaussian random number with
      * @param mean 
      * @param std
      * @return gaussian distributed value
@@ -77,5 +84,26 @@ public class RandomCounts{
     {
         Random dice = new Random();
         return mean + std*dice.nextGaussian();
+    }
+    /**
+     * Gives the likelihood of death when having heavy symptoms. depends iter alia of the overall medical situation.
+     * @param age age of the person.
+     * @param isPreDeseased gives information if the person is predeseased.
+     * @param hasITS gives informaiton if the person has a medical treatment in a hospital,
+     * @return probability of death.
+     */
+    public static double death_probability(int age, boolean isPreDeseased, boolean hasITS){
+        int predeseased = 0;
+        int ITS = 0;
+        if(isPreDeseased)
+        {
+            predeseased = 1;
+        }
+        if(hasITS)
+        {
+            ITS = 1;
+        }
+        return (MedicalSettings.medical_factor/0.9) * (8/646) * 1/(Math.exp((-age - 50 - 25 * predeseased)/10) + 1) + ITS * (1.28/646);
+        
     }
 }
