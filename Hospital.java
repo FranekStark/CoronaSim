@@ -91,6 +91,7 @@ public class Hospital implements Tickable {
 
         for (Treatment treatment : toRemove) {
             _treatments.remove(treatment);
+            treatment.getPatient().goHome();
         }
     }
 

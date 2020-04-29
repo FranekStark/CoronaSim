@@ -58,6 +58,11 @@ public class Human implements Tickable {
 
     private final int _timeInHospital;
 
+    /**
+     * Wether the Person has been treated in Hospital because of COVID-19
+     */
+    private boolean _wasAtHospital;
+
 
 
     /**
@@ -80,9 +85,6 @@ public class Human implements Tickable {
      * Describes the level of the Symptoms from COVID-19.
      */
     private SymptomLevel _symptomLevel;
-
-
-
 
 
 
@@ -212,7 +214,7 @@ public class Human implements Tickable {
         GroupingNode fartherNode = _actualNode.getFatherNode();
 
         while(!fartherNode.hasHospital() && !fartherNode.getHospital().hasEnoughPlace(1)){
-            fartherNode.getFatherNode();
+            fartherNode = fartherNode.getFatherNode();
             
             if (fartherNode == null) 
             {
@@ -222,6 +224,7 @@ public class Human implements Tickable {
         //Hospital found
         fartherNode.getHospital().treatSickHuman(this);
         _actualNode = null;
+        _wasAtHospital = true;
         
         return true;
         
@@ -244,13 +247,26 @@ public class Human implements Tickable {
                 _deseaseCounter++;
                 if(_deseaseCounter >= (_incubationTime)){
                     _healthStatus = HealthStatus.ILL;
-                    //TODO: SELECT Symptoms
+                    int randomNr = RandomCounts.giveRandomNumber(101);
+                    int sympprop = (int)(100.0 * RandomCounts.symptoms_probability(_age, _isPreDeseased));
+                    if(sympprop >= randomNr){
+                        _symptomLevel = SymptomLevel.HEAVY;
+                    }else{
+                        _symptomLevel = SymptomLevel.MILD;
+                    }
                 }
             }break;
             case ILL:{
                 _deseaseCounter++;
                 if(_deseaseCounter >= (_deseaseDuration)){
-                    //TODO: SELECT DEad or Recovered
+                   int randomNr = RandomCounts.giveRandomNumber(101);
+                   int deathprop = (int)(100.0 * RandomCounts.death_probability(_age, _isPreDeseased, _wasAtHospital));
+                   if(_symptomLevel == SymptomLevel.HEAVY && deathprop >= randomNr){
+                    _healthStatus = HealthStatus.DEAD;
+                   }else{
+                    _healthStatus = HealthStatus.RECOVERED;
+                   }
+                   _symptomLevel = SymptomLevel.NO;
                 }
             }break;
             
@@ -315,7 +331,5 @@ public class Human implements Tickable {
             _deseaseCounter = 0;
             setHealthStatus(HealthStatus.CONTAGIOUS);
        }
-
-     //TODO: Wahrscheinlichkeit für MILD/HEAVY SYMPTOMS?
     }
 }
