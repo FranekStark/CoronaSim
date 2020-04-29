@@ -324,7 +324,9 @@ public class Human implements Tickable {
         }
 
     }
-        
+    /**
+     * starts the humans infection.
+     */    
     public void infect() {
        if (_healthStatus == HealthStatus.HEALTY)
        {
