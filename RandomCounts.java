@@ -103,7 +103,7 @@ public class RandomCounts{
         {
             ITS = 1;
         }
-        return (MedicalSettings.medical_factor/0.9) * (8/646) * 1/(Math.exp((-age - 50 - 25 * predeseased)/10) + 1) + ITS * (1.28/646);
+        return (MedicalSettings.medical_factor/0.9) * (8/646) * 1/(Math.exp((-age - 50 - 25 * predeseased)/10) + 1) - ITS * (1.28/646);
         
     }
 }
