@@ -21,6 +21,8 @@ public class GroupingNode extends Node {
         _hospital = hospital;
     }
 
+
+
     /**
      * Determines wether this Node has a Hospital
      * 

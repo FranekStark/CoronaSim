@@ -39,6 +39,9 @@ public class Node {
         return _fartherNode;
     }
 
+    public void setFartherNode(GroupingNode fartherNode){
+        _fartherNode = fartherNode;
+    }
  
 
     @Override

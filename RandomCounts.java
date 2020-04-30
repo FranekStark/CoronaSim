@@ -16,6 +16,9 @@ import java.lang.Math;
  * @version 01.04.2020
  */
 public class RandomCounts{
+
+    private static Random dice = new Random();
+
     /**
      * Constructor of the RandomCounts class. 
      */
@@ -27,7 +30,6 @@ public class RandomCounts{
      */
     public static int giveRandomNumber(int bound)
     {
-        Random dice = new Random();
         int direction = dice.nextInt(bound);
         return direction;
     }
@@ -56,7 +58,6 @@ public class RandomCounts{
      */
     public static boolean giveStatement(int lowerBound, int upperBound)
     {
-        Random dice = new Random();
         boolean state = false;
         if(lowerBound < 0 || lowerBound > 100 || upperBound < 0 || upperBound > 100)
         {
@@ -82,7 +83,6 @@ public class RandomCounts{
      */
     public static double giveGaussianValue(double mean, double std)
     {
-        Random dice = new Random();
         return mean + std*dice.nextGaussian();
     }
     /**

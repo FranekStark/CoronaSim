@@ -5,19 +5,19 @@ public class LowestNode extends Node implements Tickable{
      /**
      * Left Neighbournode
      */
-    private final LowestNode _leftNeighbour;
+    private  LowestNode _leftNeighbour;
     /**
      * Right Neighbournode
      */
-    private final LowestNode _rightNeighbour;
+    private  LowestNode _rightNeighbour;
     /**
      * Bottom Neighbournode
      */
-    private final LowestNode _bottomNeighbour;
+    private  LowestNode _bottomNeighbour;
     /**
      * Top Neighbournode
      */
-    private final LowestNode _topNeighbour;
+    private  LowestNode _topNeighbour;
     
     HashSet<Human> humans = new HashSet<Human>();
     /**
@@ -38,6 +38,29 @@ public class LowestNode extends Node implements Tickable{
         _bottomNeighbour = bottomNeighbour;
         _topNeighbour = topNeighbour;  
     }
+
+    public LowestNode(){
+        this(null,null,null,null,null);
+    }
+
+    public void setNeighbourNode(Direction direction, LowestNode node){
+        	switch(direction){
+                case LEFT:
+                _leftNeighbour = node;
+                break;
+                case RIGHT:
+                _rightNeighbour = node;
+                break;
+                case TOP:
+                _topNeighbour = node;
+                break;
+                case BOTTOM:
+                _bottomNeighbour = node;
+                break;
+            }
+    }
+
+  
 
     public LowestNode getNeighbourNode(Direction direction){
         switch (direction){
