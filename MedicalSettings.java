@@ -24,16 +24,16 @@ public class MedicalSettings {
      * real data age distribution in %
      * [source: https://service.destatis.de/]
      */
-    public static final double age_prob_0_to_7 = 8;
-    public static final double age_prob_8_to_17 = 9;
-    public static final double age_prob_18_to_29 = 13;
-    public static final double age_prob_30_to_39 = 11;
-    public static final double age_prob_40_to_49 = 13;
-    public static final double age_prob_50_to_59 = 17;
-    public static final double age_prob_60_to_69 = 13;
-    public static final double age_prob_70_to_79 = 9;
-    public static final double age_prob_80_to_89 = 6;
-    public static final double age_prob_80_to_100 = 1;
+    public static double age_prob_0_to_7 = 8;
+    public static double age_prob_8_to_17 = 9;
+    public static double age_prob_18_to_29 = 13;
+    public static double age_prob_30_to_39 = 11;
+    public static double age_prob_40_to_49 = 13;
+    public static double age_prob_50_to_59 = 17;
+    public static double age_prob_60_to_69 = 13;
+    public static double age_prob_70_to_79 = 9;
+    public static double age_prob_80_to_89 = 6;
+    public static double age_prob_90_to_100 = 1;
 
     /**
      * data for the latency time (assuming gaussian)
@@ -76,7 +76,7 @@ public class MedicalSettings {
     public static final double predesease_prob_60_to_69 = 6;
     public static final double predesease_prob_70_to_79 = 7.7;
     public static final double predesease_prob_80_to_89 = 7.7;
-    public static final double predesease_prob_80_to_100 = 7.7;
+    public static final double predesease_prob_90_to_100 = 7.7;
 
 
 }

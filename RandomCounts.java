@@ -115,4 +115,7 @@ public class RandomCounts{
         }
         return (32/4893) * 1/(Math.exp((- age - 50 - 25 * predeseased)/20) + 1);
     }
+
+    
+
 }
