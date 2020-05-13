@@ -21,7 +21,7 @@ public class Node {
     /**
      * The fathe of that Node
      */
-    private final GroupingNode _fartherNode;
+    private GroupingNode _fartherNode;
 
     /**
      * Constructor of a node. Every node needs for neighbors

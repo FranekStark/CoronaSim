@@ -53,7 +53,9 @@ public class Human implements Tickable {
     /**
      * The duration of the COVID-19 desease.
      */
-    private final int  _deseaseDuration;
+    private final int  _deseaseDurationHeavy;
+    private final int  _deseaseDurationMild;
+    
 
     private final int _latentTime;
 
@@ -99,13 +101,14 @@ public class Human implements Tickable {
     /**
      * Constructor of healthy Human.
      */
-    public Human(final Government government, final int age, final boolean isPreDeseased, int desaeaseDuration, int latentTime, int incubationTime,   int timeInHospital, LowestNode homeNode) {
+    public Human(final Government government, final int age, final boolean isPreDeseased, int desaeaseDurationHeavy, int desaeaseDurationMild, int latentTime, int incubationTime,   int timeInHospital, LowestNode homeNode) {
         _id = cnt++;
         _government = government;
         _age = age;
         _isPreDeseased = isPreDeseased;
     
-        _deseaseDuration = desaeaseDuration;
+        _deseaseDurationHeavy = desaeaseDurationHeavy;
+        _deseaseDurationMild = desaeaseDurationMild;
         _latentTime = latentTime;
         _incubationTime = incubationTime;
         _timeInHospital = timeInHospital;
@@ -273,7 +276,7 @@ public class Human implements Tickable {
             }break;
             case ILL:{
                 _deseaseCounter++;
-                if(_deseaseCounter >= (_deseaseDuration)){
+                if((_symptomLevel ==  SymptomLevel.HEAVY && _deseaseCounter >= (_deseaseDurationHeavy)) || (_symptomLevel !=  SymptomLevel.HEAVY && _deseaseCounter >= (_deseaseDurationMild))){
                    int randomNr = RandomCounts.giveRandomNumber(101);
                    int deathprop = (int)(100.0 * RandomCounts.death_probability(_age, _isPreDeseased, _wasAtHospital));
                    if(_symptomLevel == SymptomLevel.HEAVY && deathprop >= randomNr){
