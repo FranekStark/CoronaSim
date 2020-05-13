@@ -7,7 +7,7 @@ public class GroupingNode extends Node {
      /**
      * The Hospital of that Node or Null;
      */
-    private final Hospital _hospital;
+    private Hospital _hospital;
 
     /**
      * Constructs a new GroupingNode with its Neighbours, SubNodes and a Hospital.
@@ -20,6 +20,12 @@ public class GroupingNode extends Node {
         super(fatherNode);
         _hospital = hospital;
     }
+
+    public void setHospital(Hospital hospital){
+        _hospital = hospital;
+    }
+
+
 
     /**
      * Determines wether this Node has a Hospital

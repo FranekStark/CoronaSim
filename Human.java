@@ -19,10 +19,6 @@ import java.util.Set;
  */
 public class Human implements Tickable {
 
-    /**
-     * The Government which this Human relates to
-     */
-    private final Government _government;
 
     /**
      * The Counter of all Persons to set the Identifier
@@ -34,6 +30,15 @@ public class Human implements Tickable {
      */
     private final long _id;
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * The Government which this Human relates to
+     */
+    private final Government _government;
+
+
+    ///////////////////////////////////////MEdical Settings
     /**
      * The age of the person determined by an age distribution. The age affects the
      * course of desease and the likelihood of death.
@@ -54,14 +59,17 @@ public class Human implements Tickable {
 
     private final int _incubationTime;
 
-    private  int _deseaseCounter;
 
     private final int _timeInHospital;
+
+    /////////////////////////////During Simulatio
 
     /**
      * Wether the Person has been treated in Hospital because of COVID-19
      */
     private boolean _wasAtHospital;
+
+    private  int _deseaseCounter;
 
 
 
@@ -90,19 +98,26 @@ public class Human implements Tickable {
 
     /**
      * Constructor of healthy Human.
-     * 
-     * @param age:           Age of the human. Will be given by an external age
-     *                       distribution.
-     * @param isPreDeseased: Shows if the person has a pre-existing lung desease.
      */
-    public Human(final int age, final boolean isPreDeseased, final Government government) {
+    public Human(final Government government, final int age, final boolean isPreDeseased, int desaeaseDuration, int latentTime, int incubationTime,   int timeInHospital, LowestNode homeNode) {
+        _id = cnt++;
+        _government = government;
         _age = age;
         _isPreDeseased = isPreDeseased;
-        _healthStatus = HealthStatus.HEALTY;
-        _id = cnt;
-        _actualNode = _homeNode;
-        _government = government;
+    
+        _deseaseDuration = desaeaseDuration;
+        _latentTime = latentTime;
+        _incubationTime = incubationTime;
+        _timeInHospital = timeInHospital;
 
+        _wasAtHospital = false;
+        _deseaseCounter = 0;
+
+        _homeNode = homeNode;
+        _actualNode = homeNode;
+
+        _healthStatus = HealthStatus.HEALTY;
+        _symptomLevel = SymptomLevel.NO;
     }
 
     /**
