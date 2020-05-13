@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.HashMap;
 
 /**
  * Main class. Simulation can be started with a fixed amount of simulated days
@@ -14,8 +15,8 @@ public class Simulation {
 
     public Government _government;
 
-    public Set<Human> _humans;
-    public Set<LowestNode> _lowestNodes;
+    public static Set<Human> _humans;
+    public static Set<LowestNode> _lowestNodes;
     public Set<GroupingNode> _groupingNodes;
     public Set<Hospital> _hospitals;
     public GroupingNode _topNode;
@@ -213,5 +214,118 @@ public class Simulation {
             lowestNode.tick();
         }
     }
+    /**
+     * returns the incidence (#infected per 100000 humans).
+     * @return incidence
+     */
+    public static double getIncidence(){
+        long ills = 0;
+        for (Human human : _humans){
+            if (human.getHealthStatus() == HealthStatus.ILL)
+            {
+                ills += 1;
+            }
+        }
+        return (double)(ills * 100000/_humans.size());
+    }
+    /**
+     * returns the mortality (deaths of COVID-19 per 100000 humans).
+     * @return mortality
+     */
+    public double getMortality(){
+        long deads = 0;
+        for (Human human : _humans){
+            if (human.getHealthStatus() == HealthStatus.DEAD)
+            {
+                deads += 1;
+            }
+        }
+        return (double)(deads * 100000/_humans.size());
 
+    }
+    /**
+     * gives the actual reproduction number R0 = infection probability * #contacts of an infected per tick * mean time of infection
+     * @return basic reproduction time
+     */
+    public static double giveReproductionNumber()
+    {   
+        double meanInfectiontime = 0.5*(MedicalSettings.desease_heavy_mean + MedicalSettings.desease_mild_mean) + MedicalSettings.incubation_mean;
+        long humans = 0;
+
+        for (LowestNode lowestNode : _lowestNodes)
+        {
+            humans += (lowestNode.humans.size() - 1);
+        }
+        return meanInfectiontime * MedicalSettings.infection_probability * (humans/_lowestNodes.size());
+    }
+
+    /**
+     * returns the number of ill people in a specific agegroup. MUST BE 0; 8; 18; 30; 40; 50; 60; 70; 80; 90;
+     */
+    public long giveIllInAge(int agegroup){
+        long ill = 0;
+        for (Human human : _humans)
+        {
+            if ((human.getAge() == agegroup) && (human.getHealthStatus() == HealthStatus.ILL))
+            {
+                ill += 1;
+            }
+        }
+        return ill;
+    }
+
+    /**
+     * gives the amount of Ill humans depending on their age listed in a map.
+     * @return the map . Key=Agegroup, Value=Amount of ill humans
+     */
+    public HashMap<Integer, Long> giveIllPerAge()
+    {
+        HashMap<Integer, Long> IllPerAge = new HashMap<Integer, Long>();
+        IllPerAge.replace(0, giveIllInAge(0));
+        IllPerAge.replace(8, giveIllInAge(8));
+        IllPerAge.replace(18, giveIllInAge(18));
+        IllPerAge.replace(30, giveIllInAge(30));
+        IllPerAge.replace(40, giveIllInAge(40));
+        IllPerAge.replace(50, giveIllInAge(50));
+        IllPerAge.replace(60, giveIllInAge(60));
+        IllPerAge.replace(70, giveIllInAge(70));
+        IllPerAge.replace(80, giveIllInAge(80));
+        IllPerAge.replace(90, giveIllInAge(90));
+
+        return IllPerAge;
+    }
+    /**
+     * returns the number of dead people in a specific agegroup. MUST BE 0; 8; 18; 30; 40; 50; 60; 70; 80; 90;
+     */
+    public long giveDeadInAge(int agegroup){
+        long dead = 0;
+        for (Human human : _humans)
+        {
+            if((human.getAge() == agegroup) && (human.getHealthStatus() == HealthStatus.DEAD))
+            {
+                dead += 1;           
+            }
+        }
+        return dead;
+    }
+    /**
+     * gives the amount of dead humans depending on their age listed in a map.
+     * @return the map . Key=Agegroup, Value=Amount of dead humans
+     */
+    public HashMap<Integer, Long> giveDeadPerAge()
+    {
+        HashMap<Integer, Long> DeadPerAge = new HashMap<Integer, Long>();
+        DeadPerAge.replace(0, giveIllInAge(0));
+        DeadPerAge.replace(8, giveIllInAge(8));
+        DeadPerAge.replace(18, giveIllInAge(18));
+        DeadPerAge.replace(30, giveIllInAge(30));
+        DeadPerAge.replace(40, giveIllInAge(40));
+        DeadPerAge.replace(50, giveIllInAge(50));
+        DeadPerAge.replace(60, giveIllInAge(60));
+        DeadPerAge.replace(70, giveIllInAge(70));
+        DeadPerAge.replace(80, giveIllInAge(80));
+        DeadPerAge.replace(90, giveIllInAge(90));
+
+        return DeadPerAge;
+    }
 }
