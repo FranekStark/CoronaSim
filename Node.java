@@ -39,6 +39,10 @@ public class Node {
         return _fartherNode;
     }
 
+    /**
+     * replacing the farther node of this node to a new node
+     * @param fartherNode the new farther node
+     */
     public void setFartherNode(GroupingNode fartherNode){
         _fartherNode = fartherNode;
     }

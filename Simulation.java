@@ -256,7 +256,7 @@ public class Simulation {
         {
             humans += (lowestNode.humans.size() - 1);
         }
-        return meanInfectiontime * MedicalSettings.infection_probability * (humans/_lowestNodes.size());
+        return meanInfectiontime * (double)MedicalSettings.infection_probability * 0.01 * (humans/_lowestNodes.size());
     }
 
     /**

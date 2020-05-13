@@ -1,9 +1,23 @@
+/**
+ * The Government class represents the government of the nodes. The government can change the lockdown level of the nodes. 
+ * The lockdown level can changed manually or automaticly depending on the reproduction number or the incidence.
+ * The boundary values can be changed.
+ * @author: Franek Stark, Finn Welzmüller
+ */
 public class Government implements Tickable
 {  
     private int _maxTreeLevel;
-        
+    
+    /**
+     * sets the Lockdown level to auto (true) or to manual (false)
+     */
     public boolean autosetLockdownLevel;
+
+    /**
+     * sets the dependence in autolockdownlevel to reproduction number (true) or to incidence (false)
+     */
     public boolean repNumberDependence;
+
     /**
      * Sets the boundaries of the different lockdown levels in terms of the reproduciton number.
      */
@@ -29,23 +43,34 @@ public class Government implements Tickable
      */
     public static double population_density = 2.25 * 0.000237;
      
-
+    /**
+     * constructor for the Government class
+     * @param maxTreeLevel the maximal Treelevel
+     */
     public Government(int maxTreeLevel){
         _maxTreeLevel = maxTreeLevel;
     }
-
+    /**
+     * set another maximal tree level
+     * @param maxTreeLevel
+     */
     public void setMaxTreeLevel(int maxTreeLevel){
         _maxTreeLevel = maxTreeLevel;
     }
 
+    /**
+     * returns the actual maximal treelevel
+     * @return the actual maximal treelevel
+     */
     public int getMaxTreeLevel(){
         return _maxTreeLevel;
     }
+
     /** 
-    * autosets the LockdownLevel depending on ether the reproduction number or the incidence.
-    * inputboolean = true for dependence of the reproduction number
-    * inputboolean = false for dependence of the incidence.
-    *  TODO: check for maxtreelevels
+     * autosets the LockdownLevel depending on ether the reproduction number or the incidence.
+     * inputboolean = true for dependence of the reproduction number
+     * inputboolean = false for dependence of the incidence.
+     * TODO: check for maxtreelevels
     */
     public void changeLockdownLevel(boolean repNumberTrue){
         if (repNumberTrue)
@@ -97,6 +122,7 @@ public class Government implements Tickable
             }
         }
     }
+
     /**
      * Tick method for the Government. If autosetLockdownLevel is true, check Lockdownlevel
      */

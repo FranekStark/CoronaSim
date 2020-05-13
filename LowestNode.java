@@ -1,8 +1,13 @@
 import java.util.HashSet;
 
+/**
+ * LowestNodes are on the lowest level of the tree of nodes.
+ * Humans moving on lowest nodes with neighbors in four directions
+ * @author Franek Stark, Finn Welzmüller
+ */
 public class LowestNode extends Node implements Tickable{
 
-     /**
+    /**
      * Left Neighbournode
      */
     private  LowestNode _leftNeighbour;
@@ -38,11 +43,19 @@ public class LowestNode extends Node implements Tickable{
         _bottomNeighbour = bottomNeighbour;
         _topNeighbour = topNeighbour;  
     }
-
+    
+    /**
+     * constructor of the LowestNode class.
+     */
     public LowestNode(){
         this(null,null,null,null,null);
     }
 
+    /**
+     * sets the neighbor node of a lowest node to a specific direction.
+     * @param direction the direction of the neighbor
+     * @param node the neighbor node
+     */
     public void setNeighbourNode(Direction direction, LowestNode node){
         	switch(direction){
                 case LEFT:
@@ -61,7 +74,11 @@ public class LowestNode extends Node implements Tickable{
     }
 
   
-
+    /**
+     * returns the neighbor note in a given direction
+     * @param direction 
+     * @return the node.
+     */
     public LowestNode getNeighbourNode(Direction direction){
         switch (direction){
             case LEFT:
@@ -96,6 +113,7 @@ public class LowestNode extends Node implements Tickable{
 
         return level;
     }
+
     /**
      * Let a human enter the node
      * @param human 
@@ -113,6 +131,7 @@ public class LowestNode extends Node implements Tickable{
     {
         humans.remove(human);
     }
+
     /**
      * returns the set of humans.
      */

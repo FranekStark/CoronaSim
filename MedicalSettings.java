@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This Class contains all Magic-Numbers regarding the medical system.
+ * This Class contains all Magic-Numbers regarding the medical system. And the statistical data.
  */
 public class MedicalSettings {
 

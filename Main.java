@@ -1,4 +1,7 @@
-
+/**
+ * Main class
+ * @author Franek Stark, Finn Welzmüller
+ */
 public class Main {
    
 
