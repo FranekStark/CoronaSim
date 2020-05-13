@@ -99,7 +99,7 @@ public class Human implements Tickable {
     /**
      * Constructor of healthy Human.
      */
-    public Human(final Government government, final int age, final boolean isPreDeseased, int desaeaseDuration, int latentTime, int incubationTime, int timeInHospital, LowestNode homeNode) {
+    public Human(final Government government, final int age, final boolean isPreDeseased, int desaeaseDuration, int latentTime, int incubationTime,   int timeInHospital, LowestNode homeNode) {
         _id = cnt++;
         _government = government;
         _age = age;

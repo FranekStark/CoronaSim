@@ -115,4 +115,9 @@ public class RandomCounts{
         }
         return (32/4893) * 1/(Math.exp((- age - 50 - 25 * predeseased)/20) + 1);
     }
+
+
+    public static  getRandomNode(List<? extends LowestNode> nodes){
+        return nodes.get(0);
+    }
 }

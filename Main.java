@@ -169,8 +169,23 @@ public class Main {
             int randomNumber = RandomCounts.giveRandomNumber(101);
           
 
-            Human newHuman = new Human(_government, age, isPreDeseased, desaeaseDuration, latentTime, incubationTime, timeInHospital, homeNode)
+            int age = 0;
+            boolean isPreDeseased = false;
+            int desaeaseDuration = 0;
+            int latentTime = 0;
+            int incubationTime = 0;
+            int timeInHospital = 0;
+            LowestNode homeNode = null;
+
+            Human newHuman = new Human(_government, age, isPreDeseased, desaeaseDuration, latentTime, incubationTime, timeInHospital, homeNode);
+            _humans.add(newHuman);
         }
+
+        for (Human human : _humans) {
+            
+        }
+
+
 
     }
 
