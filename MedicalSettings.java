@@ -64,6 +64,13 @@ public class MedicalSettings {
     public static double desease_heavy_std = 5.18;
 
     /**
+     * data for the time in the hospital (assuming gaussian)
+     * [source: rki.de]
+     */
+    public static double hospital_time_mean = 10;
+    public static double hospital_time_std = 5.18;
+
+    /**
      * real data probability of having a lung desease (besides COVID-19) in %
      * [source: rki.de]
      */
