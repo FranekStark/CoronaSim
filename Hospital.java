@@ -81,7 +81,7 @@ public class Hospital implements Tickable {
      * or the total amount of available treatments
      * @param fraction true: returns the fraction, false: returns total amount
      */
-    public double giveAmountsOfTreatments(boolean fraction){
+    public double giveFractionOfTreatments(boolean fraction){
         if(fraction)
         {
             return ((double)getAmountOfTreatments()/(double)getmaxSize());
@@ -120,7 +120,7 @@ public class Hospital implements Tickable {
             _treatments.remove(treatment);
             treatment.getPatient().goHome();
         }
-        
+        giveFractionOfTreatments(true);
     }
 
 }
