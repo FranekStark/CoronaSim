@@ -160,8 +160,8 @@ public class Simulation {
         _hospitals.add(hospital);
         _topNode.setHospital(hospital);
 
-        // Add Government
-        _government = new Government(numberOfLevels);
+        // Add Government with autosetLockdownLevel is off.
+        _government = new Government(numberOfLevels, false, false);
 
         // Add Humans
         Map<Integer, MedicalSettings.AgeDistributal> distribution = MedicalSettings.giveAgeDistribution();
@@ -213,6 +213,7 @@ public class Simulation {
         for (LowestNode lowestNode : _lowestNodes) {
             lowestNode.tick();
         }
+        _government.tick();
     }
     /**
      * returns the incidence (#infected per 100000 humans).

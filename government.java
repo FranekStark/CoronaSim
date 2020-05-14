@@ -11,12 +11,12 @@ public class Government implements Tickable
     /**
      * sets the Lockdown level to auto (true) or to manual (false)
      */
-    public boolean autosetLockdownLevel;
+    public boolean _autosetLockdownLevel;
 
     /**
      * sets the dependence in autolockdownlevel to reproduction number (true) or to incidence (false)
      */
-    public boolean repNumberDependence;
+    public boolean _repNumberDependence;
 
     /**
      * Sets the boundaries of the different lockdown levels in terms of the reproduciton number.
@@ -47,8 +47,10 @@ public class Government implements Tickable
      * constructor for the Government class
      * @param maxTreeLevel the maximal Treelevel
      */
-    public Government(int maxTreeLevel){
+    public Government(int maxTreeLevel, boolean autosetLockdownLevel, boolean repNumberDependence){
         _maxTreeLevel = maxTreeLevel;
+        _autosetLockdownLevel = autosetLockdownLevel;
+        _repNumberDependence = repNumberDependence;
     }
     /**
      * set another maximal tree level
@@ -70,7 +72,7 @@ public class Government implements Tickable
      * autosets the LockdownLevel depending on ether the reproduction number or the incidence.
      * inputboolean = true for dependence of the reproduction number
      * inputboolean = false for dependence of the incidence.
-     * TODO: check for maxtreelevels
+     * 
     */
     public void changeLockdownLevel(boolean repNumberTrue){
         if (repNumberTrue)
@@ -78,19 +80,19 @@ public class Government implements Tickable
             // Reproduction Number dependence...
             if(Simulation.giveReproductionNumber() > repNumberLvL1)
             {
-
+                setMaxTreeLevel((int)(0.8 *_maxTreeLevel));
             }
             if(Simulation.giveReproductionNumber() > repNumberLvL2)
             {
-
+                setMaxTreeLevel((int)(0.6 * _maxTreeLevel));
             }
             if(Simulation.giveReproductionNumber() > repNumberLvL3)
             {
-
+                setMaxTreeLevel((int)(0.4 * _maxTreeLevel));
             }
             if(Simulation.giveReproductionNumber() > repNumberLvL4)
             {
-
+                setMaxTreeLevel((int)(0.2 * _maxTreeLevel));
             }
             if(Simulation.giveReproductionNumber() > repNumberLvL5)
             {
@@ -102,19 +104,19 @@ public class Government implements Tickable
             //Incidence dependence...
             if(Simulation.getIncidence() > incidenceNumberLvL1)
             {
-
+                setMaxTreeLevel((int)(0.8 *_maxTreeLevel));
             }
             if(Simulation.getIncidence() > incidenceNumberLvL2)
             {
-
+                setMaxTreeLevel((int)(0.6 *_maxTreeLevel));
             }
             if(Simulation.getIncidence() > incidenceNumberLvL3)
             {
-
+                setMaxTreeLevel((int)(0.4 *_maxTreeLevel));
             }
             if(Simulation.getIncidence() > incidenceNumberLvL4)
             {
-
+                setMaxTreeLevel((int)(0.2 *_maxTreeLevel));
             }
             if(Simulation.getIncidence() > incidenceNumberLvL5)
             {
@@ -128,9 +130,9 @@ public class Government implements Tickable
      */
     public void tick()
     {   
-        if(autosetLockdownLevel)
+        if(_autosetLockdownLevel)
         {
-            changeLockdownLevel(repNumberDependence);
+            changeLockdownLevel(_repNumberDependence);
         }
     }
 }

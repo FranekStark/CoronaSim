@@ -63,7 +63,34 @@ public class Hospital implements Tickable {
         _treatments.add(new Treatment(sickHuman));
     }
 
+    /**
+     * @return the _maxSize
+     */
+    public int getmaxSize() {
+        return _maxSize;
+    }
+    /**
+     * @return the actual amount of used treatments.
+     */
+    public int getAmountOfTreatments(){
+        return _treatments.size();
+    }
 
+    /**
+     * returns the fraction of provided treatments with respect to the maximal amount 
+     * or the total amount of available treatments
+     * @param fraction true: returns the fraction, false: returns total amount
+     */
+    public double giveAmountsOfTreatments(boolean fraction){
+        if(fraction)
+        {
+            return ((double)getAmountOfTreatments()/(double)getmaxSize());
+        }
+        else
+        {
+            return (double)(getmaxSize() - getAmountOfTreatments());
+        }
+    }
     @Override
     public int hashCode() {
         return (int) _id;
@@ -93,6 +120,7 @@ public class Hospital implements Tickable {
             _treatments.remove(treatment);
             treatment.getPatient().goHome();
         }
+        
     }
 
 }
