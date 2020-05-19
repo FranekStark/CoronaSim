@@ -2,24 +2,28 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SimulationControllViewController">
    <center>
       <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <FlowPane prefHeight="200.0" prefWidth="200.0" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <ScrollPane>
+               <content>
+                  <FlowPane fx:id="charsPane" />
+               </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" />
          </items>
       </SplitPane>
    </center>
@@ -33,30 +37,68 @@
                         <HBox>
                            <children>
                               <Label text="Current Tick:" />
-                              <Label text="0" />
+                              <Label id="current_tick" fx:id="currentTickLabel" text="0" />
                            </children>
                         </HBox>
-                        <HBox>
-                           <children>
-                              <Label text="One Tick" />
-                              <Button mnemonicParsing="false" text="Simulate" />
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <TextField prefHeight="25.0" prefWidth="41.0" />
-                              <Label text="Ticks" />
-                              <Button mnemonicParsing="false" text="Simulate" />
-                           </children>
-                        </HBox>
-                        <ProgressBar prefWidth="200.0" progress="0.0" />
+                        <TitledPane text="Manual">
+                           <content>
+                              <HBox>
+                                 <children>
+                                    <Label text="Simulate one Tick" />
+                                    <Button fx:id="manualSimulateButton" mnemonicParsing="false" text="Simulate" />
+                                 </children>
+                              </HBox>
+                           </content>
+                        </TitledPane>
+                        <TitledPane text="Continous">
+                           <content>
+                              <VBox>
+                                 <children>
+                                          <HBox>
+                                             <children>
+                                                <Label text="Simulate for" />
+                                                <TextField fx:id="NumberOfTicksTextBox" prefHeight="25.0" prefWidth="41.0" />
+                                                <Label text="Ticks" />
+                                                <Button fx:id="continousSimulateButton" mnemonicParsing="false" text="Simulate" />                                              
+                                             </children>
+                                          </HBox>
+                                           <ProgressBar progress="0.0" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                        <TitledPane text="Automated">
+                           <content>
+                              <HBox>
+                                 <children>
+                                    <Label text="Simulate until" />
+                                    <ChoiceBox fx:id="kindOfTerminationCoiceBox" />
+                                    <Label text="=" />
+                                    <TextField fx:id="valueOfTerminationTexBox" />
+                                    <Button mnemonicParsing="false" text="Simulate" />
+                                 </children>
+                              </HBox>
+                           </content>
+                        </TitledPane>
                      </children>
                   </VBox>
                </content>
           </TitledPane>
-            <TitledPane prefHeight="200.0" prefWidth="200.0" text="View Settings">
+            <TitledPane text="View Settings">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox>
+                     <children>
+                        <TitledPane text="Chars">
+                           <content>
+                              <ScrollPane>
+                                 <content>
+                                    <VBox fx:id="charsBox" />
+                                 </content>
+                              </ScrollPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
                </content>
             </TitledPane>
             <TitledPane prefHeight="200.0" prefWidth="200.0" text="Data Export" />
