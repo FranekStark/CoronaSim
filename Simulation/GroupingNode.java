@@ -1,5 +1,8 @@
+package Simulation;
+
 /**
  * The Group-Node derives from the Node and has Subnodes.
+ * 
  * @author Finn Welzmüller, Franek Stark
  */
 public class GroupingNode extends Node {

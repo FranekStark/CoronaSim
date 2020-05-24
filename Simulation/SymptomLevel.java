@@ -1,4 +1,4 @@
-
+package Simulation;
 
     /**
      * NO - No Symptoms, can be contragious or not, no affection of the movement.

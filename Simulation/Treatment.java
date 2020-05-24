@@ -1,3 +1,5 @@
+package Simulation;
+
 /**
  * Implements a Treatment of an Human which is since a duration.
  * 

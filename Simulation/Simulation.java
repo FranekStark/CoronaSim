@@ -1,3 +1,5 @@
+package Simulation;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,8 +22,11 @@ public class Simulation {
     public Set<Hospital> _hospitals;
     public GroupingNode _topNode;
 
+    private long _tick;
+
     public Simulation(long numberOfHumans, int numberOfLevels, double lowestNodePerHuman, int maxSizeOfTreatments,
             boolean sphericShape, int ticksPerDay) {
+                _tick=0;
         long numberOfLowestNodes = (long) (numberOfHumans * lowestNodePerHuman);
         if (numberOfLowestNodes <= 0) {
             throw new IllegalArgumentException("Overflow in number of lowest Nodes");
@@ -201,6 +206,7 @@ public class Simulation {
     }
 
     public void tickAll() {
+        _tick++;
         for (Human human : _humans) {
             human.tick();
         }
@@ -212,6 +218,11 @@ public class Simulation {
         for (LowestNode lowestNode : _lowestNodes) {
             lowestNode.tick();
         }
+    }
+
+
+    public long getCurrentTick(){
+        return _tick;
     }
 
 }

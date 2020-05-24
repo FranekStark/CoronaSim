@@ -1,3 +1,5 @@
+package Simulation;
+
 /**
  * Class for a base-type node. Nodes are connected to other nodes of the same type.
  * Humans on a node can walk to one of the neighbors (left, right, top and bottom) in a time-step. 

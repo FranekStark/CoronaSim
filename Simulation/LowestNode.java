@@ -1,3 +1,5 @@
+package Simulation;
+
 import java.util.HashSet;
 
 public class LowestNode extends Node implements Tickable{
