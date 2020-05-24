@@ -231,3 +231,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/java,bluej,windows,eclipse,intellij,code-java
+.idea/
