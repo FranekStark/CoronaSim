@@ -13,16 +13,18 @@ import javafx.scene.chart.Chart;
 
 public class SimulationControllViewModel implements ViewModel {
 
-    private LongProperty _numberForContinousSimulation;
-    private BooleanProperty _canSimulateContinous;
-    private DoubleProperty _progressOfContinousSimulation;
-    private ObservableList<Chart> _charts;
-    private ObjectProperty<ContinousDataRecord> _kindOfAutomatedSimulationEnd;
-    private ObjectProperty<String> _automatedSimulationEndValue;
-    private BooleanProperty _canSimulateAutomated;
+    LongProperty _numberForContinousSimulation;
+    BooleanProperty _canSimulateContinous;
+    DoubleProperty _progressOfContinousSimulation;
+    ObjectProperty<ContinousDataRecord> _kindOfAutomatedSimulationEnd;
+    ObjectProperty<Number> _automatedSimulationEndValue;
+    ObjectProperty<Class<? extends Number>> _typeOfAutomatedSimulationEnd;
+    BooleanProperty _canSimulateAutomated;
+    LongProperty _currentTick;
 
-    private LongProperty _currentTick;
-
+    ObservableList<ChartListItemViewModel> _charts;
+    ObservableList<ContinousDataRecordItemViewModel<? extends Number>> _continusRecords;
+    
     private Simulation _simulation;
 
 
@@ -30,11 +32,22 @@ public class SimulationControllViewModel implements ViewModel {
 
     } 
 
-    public void simulateTick(int numberOfTicks){
+    public void simulateTicks(){
 
     }
 
-    public <T> void simulateUntil(ContinousDataRecord<T> dataRecord, T stopMark){
+    public void simulateOneTick(){
+        
+    }
+
+    public void simulateAutomated(){
+
+    }
+
+
+
+
+    private <T> void simulateUntil(ContinousDataRecord<T> dataRecord, T stopMark){
 
     }
     
